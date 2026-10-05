@@ -1,0 +1,40 @@
+{% extends 'master/base.html' %} {% block title %} Add Blog {% endblock title %}
+{% block block1 %}
+<div class="container">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" class="form-control" id="title" value="{{ blog.title|default:'' }}" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="author_name" class="form-label">Author Name</label>
+      <input type="text" name="author_name" class="form-control" id="author_name" value="{{ blog.author_name|default:'' }}" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <textarea name="content" id="content" class="form-control" required>{{ blog.content|default:'' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" name="category" id="category" aria-label="Default select example" required>
+        <option value="">Open this select menu</option>
+        <option value="Education" {% if blog.category == 'Education' %}selected{% endif %}>Education</option>
+        <option value="Technologies" {% if blog.category == 'Technologies' %}selected{% endif %}>Technologies</option>
+        <option value="Sports" {% if blog.category == 'Sports' %}selected{% endif %}>Sports</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="blog_image" class="form-label">Blog Image</label>
+      <input type="file" name="blog_image" class="form-control" id="blog_image" {% if not blog %}required{% endif %} />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% endblock block1 %}

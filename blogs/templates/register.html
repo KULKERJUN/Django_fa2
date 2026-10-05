@@ -1,0 +1,33 @@
+{% extends 'master/base.html' %} {% block title %} Register {% endblock title %}
+{% block block1 %}
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" name="username" class="form-control" id="username" required />
+    </div>
+    <div class="mb-3">
+      <label for="full_name" class="form-label">Full Name</label>
+      <input type="text" name="full_name" class="form-control" id="full_name" required />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required />
+      <div id="emailHelp" class="form-text">
+        We'll never share your email with anyone else.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="password" required />
+    </div>
+    <div class="mb-3">
+      <label for="conf_password" class="form-label">Confirm Password</label>
+      <input type="password" name="conf_password" class="form-control" id="conf_password" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% endblock block1 %}

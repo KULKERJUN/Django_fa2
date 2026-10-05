@@ -1,0 +1,8 @@
+{% extends 'master/base.html' %} {% block title %} HOME {% endblock title %}
+{% block block1 %}
+
+<div class="container">
+  <h1>Welcome {{request.user.username}} !</h1>
+</div>
+
+{% endblock block1 %}

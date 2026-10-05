@@ -1,0 +1,40 @@
+{% extends 'master/base.html' %} {% block title %} Blog List {% endblock title %}
+{% block block1 %}
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Image</th>
+        <th>Publish Date</th>
+        <th>Actions</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in data %}
+      <tr>
+        <td>{{ data.title }}</td>
+        <td>{{ data.author_name }}</td>
+        <td>
+          {% if data.blog_image %}
+          <img src="{{ data.blog_image.url }}" alt="{{ data.title }}" width="80" />
+          {% else %}
+          <span class="text-muted">No image</span>
+          {% endif %}
+        </td>
+        <td>{{ data.publish_date|date:"Y-m-d" }}</td>
+        <td>
+          <a href="{% url 'delete' data.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+        <td>
+          <a href="{% url 'blog_edit' data.id %}" class="btn btn-success btn-sm">Edit</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock block1 %}

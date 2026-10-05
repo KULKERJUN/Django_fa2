@@ -1,0 +1,47 @@
+{% extends 'master/base.html' %}
+{% block title %} Edit Blog {% endblock title %}
+
+{% block block1 %}
+<div class="container mt-4">
+  <h3>Edit Blog</h3>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" name="title" id="title" class="form-control" value="{{ blog.title }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="author_name" class="form-label">Author Name</label>
+      <input type="text" name="author_name" id="author_name" class="form-control" value="{{ blog.author_name }}" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <textarea name="content" id="content" class="form-control" rows="5" required>{{ blog.content }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select name="category" id="category" class="form-select" required>
+        <option value="">Select category</option>
+        <option value="Education" {% if blog.category == 'Education' %}selected{% endif %}>Education</option>
+        <option value="Technologies" {% if blog.category == 'Technologies' %}selected{% endif %}>Technologies</option>
+        <option value="Sports" {% if blog.category == 'Sports' %}selected{% endif %}>Sports</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="blog_image" class="form-label">Blog Image</label>
+      <input type="file" name="blog_image" id="blog_image" class="form-control">
+      {% if blog.blog_image %}
+        <small class="text-muted">Current image: {{ blog.blog_image.name }}</small>
+      {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Blog</button>
+    <a href="{% url 'blog_list_page' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock block1 %}
